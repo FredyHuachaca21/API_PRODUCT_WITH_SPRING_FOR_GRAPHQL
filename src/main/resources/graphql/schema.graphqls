@@ -1,19 +1,100 @@
 type Query {
     getProductById(id: ID!): Product
     getAllProducts: [Product]
+
+    getMarcaById(id: ID!): Marca
+    getAllMarcas: [Marca]
+
+    getCategoriaById(id: ID!): Categoria
+    getAllCategorias: [Categoria]
 }
 
 type Mutation {
     saveProduct(productInput: ProductInput!): Product!
-    updateProduct(id: ID, productInput: ProductInput!): Product!
+    updateProduct(id: ID productInput: ProductInput!): Product!
     deleteProductById(id: ID): Boolean
+
+    saveMarca(marcaInput: MarcaInput): Marca!
+    updateMarca(id: ID marcaInput: MarcaInput!): Marca!
+    deleteMarcaById(id: ID): Boolean
+
+    saveCategoria(categoriaInput: CategoriaInput!): Categoria!
+    updateCategoria(id: ID categoriaInput: CategoriaInput!): Categoria!
+    deleteCategoriaById(id: ID): Boolean
 }
 
 input ProductInput {
-    name: String
+     nombre: String
+     descripcion: String
+     precio: String
+     stock: Int
+     unidadMedida: UnidadMedida
+     moneda: Moneda
+     fechaIngreso: String
+     fechaActualizacion: String
+     marcaId: String
+     categoriaId: String
+}
+input MarcaInput {
+    nombre: String!
+    descripcion: String!
+    fechaCreacion: String
+    fechaActualizacion: String
+}
+input CategoriaInput {
+    nombre: NombreCategoria
+    descripcion: String
+    fechaCreacion: String
+    fechaActualizacion: String
 }
 
 type Product {
     id: ID!
-    name: String
+    nombre: String
+    descripcion: String
+    precio: String
+    stock: Int
+    unidadMedida: UnidadMedida
+    moneda: Moneda
+    fechaIngreso: String
+    fechaActualizacion: String
+    marcaId: String
+    categoriaId: String
+}
+type Marca {
+    id: ID
+    nombre: String
+    descripcion: String
+    fechaCreacion: String
+    fechaActualizacion: String
+}
+type Categoria {
+    id: ID
+    nombre: NombreCategoria
+    descripcion: String
+    fechaCreacion: String
+    fechaActualizacion: String
+}
+
+enum UnidadMedida {
+    UNIDAD
+    KILOGRAMO
+    LITRO
+    GRAMO
+    MILILITRO
+}
+enum Moneda {
+    USD
+    EUR
+    PEN
+}
+enum NombreCategoria {
+    ALIMENTOS
+    BEBIDAS
+    LIMPIEZA
+    HIGIENE_PERSONAL
+    ELECTRONICA
+    HOGAR
+    JUGUETES
+    OFICINA
 }

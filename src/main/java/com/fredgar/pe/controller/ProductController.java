@@ -2,7 +2,7 @@ package com.fredgar.pe.controller;
 
 import com.fredgar.pe.input.ProductInput;
 import com.fredgar.pe.model.Product;
-import com.fredgar.pe.service.ProductService;
+import com.fredgar.pe.service.ProductoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.*;
 import org.springframework.stereotype.Controller;
@@ -14,7 +14,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ProductController {
 
-  private final ProductService service;
+  private final ProductoService service;
 
   @QueryMapping
   public Optional<Product> getProductById(@Argument String id) {

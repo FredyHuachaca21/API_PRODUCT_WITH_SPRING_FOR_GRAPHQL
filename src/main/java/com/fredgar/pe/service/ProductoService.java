@@ -6,7 +6,7 @@ import com.fredgar.pe.model.Product;
 import java.util.List;
 import java.util.Optional;
 
-public interface ProductService {
+public interface ProductoService {
   Optional<Product> getProductById(String id);
   List<Product> getAllProducts();
   Product saveProduct(ProductInput productInput);
