@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
@@ -24,8 +25,10 @@ public class Product {
   private Integer stock;
   private UnidadMedida unidadMedida;
   private Moneda moneda;
-  private String fechaIngreso;
+  private String fechaCreacion;
   private String fechaActualizacion;
-  private String marcaId;
-  private String categoriaId;
+  @DBRef
+  private Marca marca;
+  @DBRef
+  private Categoria categoria;
 }

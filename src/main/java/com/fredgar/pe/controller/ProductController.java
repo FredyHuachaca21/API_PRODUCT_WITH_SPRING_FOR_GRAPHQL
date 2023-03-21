@@ -1,7 +1,7 @@
 package com.fredgar.pe.controller;
 
-import com.fredgar.pe.input.ProductInput;
 import com.fredgar.pe.model.Product;
+import com.fredgar.pe.record.ProductoInputRecord;
 import com.fredgar.pe.service.ProductoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.*;
@@ -27,13 +27,13 @@ public class ProductController {
   }
 
   @MutationMapping
-  public Product saveProduct(@Argument ProductInput productInput) {
-    return service.saveProduct(productInput);
+  public Product saveProduct(@Argument ProductoInputRecord productoInputRecord) {
+    return service.crearProducto(productoInputRecord);
   }
 
   @MutationMapping
-  public Product updateProduct(@Arguments String id, ProductInput productInput) {
-    return service.updateProduct(id, productInput);
+  public Product updateProduct(@Arguments String id, ProductoInputRecord productoInputRecord) {
+    return service.actualizarProducto(id, productoInputRecord);
   }
 
   @MutationMapping

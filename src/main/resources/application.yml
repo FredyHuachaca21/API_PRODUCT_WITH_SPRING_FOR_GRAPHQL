@@ -5,3 +5,9 @@ spring:
   graphql:
     graphiql:
       enabled: true
+
+logging:
+  level:
+    root: INFO
+    com.fredgar.pe.controller: WARN
+    com.fredgar.pe.service.logic: WARN

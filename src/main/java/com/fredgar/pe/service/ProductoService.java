@@ -1,7 +1,7 @@
 package com.fredgar.pe.service;
 
-import com.fredgar.pe.input.ProductInput;
 import com.fredgar.pe.model.Product;
+import com.fredgar.pe.record.ProductoInputRecord;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,8 +9,8 @@ import java.util.Optional;
 public interface ProductoService {
   Optional<Product> getProductById(String id);
   List<Product> getAllProducts();
-  Product saveProduct(ProductInput productInput);
-  Product updateProduct(String id, ProductInput productInput);
   Boolean deleteProductById(String id);
+  Product crearProducto(ProductoInputRecord productoInputRecord);
+  Product actualizarProducto(String id, ProductoInputRecord productoInputRecord);
 
 }

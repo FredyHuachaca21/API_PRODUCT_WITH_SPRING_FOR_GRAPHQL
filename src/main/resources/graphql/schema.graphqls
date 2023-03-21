@@ -10,8 +10,8 @@ type Query {
 }
 
 type Mutation {
-    saveProduct(productInput: ProductInput!): Product!
-    updateProduct(id: ID productInput: ProductInput!): Product!
+    crearProducto(productInputRecord: ProductInputRecord!): Product!
+    actualizarProducto(id: ID productInput: ProductInput!): Product!
     deleteProductById(id: ID): Boolean
 
     saveMarca(marcaInput: MarcaInput): Marca!
@@ -24,17 +24,31 @@ type Mutation {
 }
 
 input ProductInput {
-     nombre: String
-     descripcion: String
-     precio: String
-     stock: Int
-     unidadMedida: UnidadMedida
-     moneda: Moneda
+     nombre: String!
+     descripcion: String!
+     precio: String!
+     stock: Int!
+     unidadMedida: UnidadMedida!
+     moneda: Moneda!
      fechaIngreso: String
      fechaActualizacion: String
      marcaId: String
      categoriaId: String
 }
+
+input ProductInputRecord {
+    nombre: String!
+    descripcion: String!
+    precio: String!
+    stock: Int!
+    unidadMedida: UnidadMedida!
+    moneda: Moneda!
+    fechaCreacion: String
+    fechaActualizacion: String
+    marcaId: String
+    categoriaId: String
+}
+
 input MarcaInput {
     nombre: String!
     descripcion: String!
@@ -56,10 +70,10 @@ type Product {
     stock: Int
     unidadMedida: UnidadMedida
     moneda: Moneda
-    fechaIngreso: String
+    fechaCreacion: String
     fechaActualizacion: String
-    marcaId: String
-    categoriaId: String
+    marca: Marca
+    categoria: Categoria
 }
 type Marca {
     id: ID
