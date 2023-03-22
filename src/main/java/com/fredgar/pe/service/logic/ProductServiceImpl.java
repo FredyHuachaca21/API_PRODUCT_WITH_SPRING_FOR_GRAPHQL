@@ -65,33 +65,11 @@ public class ProductServiceImpl implements ProductoService {
           .errorClassification(BAD_REQUEST)
           .build();
     }
-
-    String marcaId = productoInputRecord.marcaId();
-    String categoriaId = productoInputRecord.categoriaId();
-
-    Optional<Marca> marca = marcaService.getMarcaById(marcaId);
-    log.info("Marca recuperada: {}", marca);
-
-    Optional<Categoria> categoria = categoriaService.getCategoriaById(categoriaId);
-    log.info("Categoria recuperada: {}", categoria);
-
     Product product = new Product();
-    product.setNombre(productoInputRecord.nombre());
-    product.setDescripcion(productoInputRecord.descripcion());
-    product.setPrecio(BigDecimal.valueOf(productoInputRecord.precio().doubleValue()));
-    product.setStock(productoInputRecord.stock());
-    product.setUnidadMedida(productoInputRecord.unidadMedida());
-    product.setMoneda(productoInputRecord.moneda());
     product.setFechaCreacion(LocalDateTime.now().toString());
     product.setFechaActualizacion(LocalDateTime.now().toString());
-    product.setMarca(marca.orElseThrow(() -> GraphqlErrorException.newErrorException()
-        .message("Marca no encontrada")
-        .errorClassification(NOT_FOUND)
-        .build()));
-    product.setCategoria(categoria.orElseThrow(() -> GraphqlErrorException.newErrorException()
-        .message("Categoria no encontrada")
-        .errorClassification(NOT_FOUND)
-        .build()));
+
+    setProductPropertiesFromInputRecord(product, productoInputRecord);
 
     Product productDB = repository.save(product);
     log.info("Producto guardado: {}", productDB);
@@ -106,25 +84,42 @@ public class ProductServiceImpl implements ProductoService {
 
   @Override
   public Product actualizarProducto(String id, ProductoInputRecord productoInputRecord) {
-    Product product = repository.findById(id).orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+    Product product = repository.findById(id).orElseThrow(() -> GraphqlErrorException.newErrorException()
+        .message("Producto no encontrado con ID: " + id)
+        .errorClassification(NOT_FOUND)
+        .build());
 
+    setProductPropertiesFromInputRecord(product, productoInputRecord);
+    product.setFechaActualizacion(productoInputRecord.fechaActualizacion());
+
+    return repository.save(product);
+  }
+
+  private void setProductPropertiesFromInputRecord(Product product, ProductoInputRecord productoInputRecord) {
     String marcaId = productoInputRecord.marcaId();
     String categoriaId = productoInputRecord.categoriaId();
 
-    Marca marca = marcaRepository.findById(marcaId).orElseThrow(() -> new RuntimeException("Marca no encontrada"));
-    Categoria categoria = categoriaRepository.findById(categoriaId).orElseThrow(() -> new RuntimeException("Categoria no encontrada"));
+    Marca marca = marcaService.getMarcaById(marcaId).orElseThrow(() -> GraphqlErrorException.newErrorException()
+        .message("Marca no encontrada")
+        .errorClassification(NOT_FOUND)
+        .build());
+    log.info("Marca recuperada: {}", marca);
+
+    Categoria categoria = categoriaService.getCategoriaById(categoriaId).orElseThrow(()-> GraphqlErrorException
+        .newErrorException()
+        .message("Categoria no encontrada")
+        .errorClassification(NOT_FOUND)
+        .build());
+    log.info("Categoria recuperada: {}", categoria);
 
     product.setNombre(productoInputRecord.nombre());
     product.setDescripcion(productoInputRecord.descripcion());
-    product.setPrecio(productoInputRecord.precio());
+    product.setPrecio(BigDecimal.valueOf(productoInputRecord.precio().doubleValue()));
     product.setStock(productoInputRecord.stock());
     product.setUnidadMedida(productoInputRecord.unidadMedida());
     product.setMoneda(productoInputRecord.moneda());
-    product.setFechaActualizacion(productoInputRecord.fechaActualizacion());
     product.setMarca(marca);
     product.setCategoria(categoria);
-
-    return repository.save(product);
   }
 
 
