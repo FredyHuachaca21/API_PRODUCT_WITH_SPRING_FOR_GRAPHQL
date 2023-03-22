@@ -26,7 +26,7 @@ type Mutation {
 input ProductInput {
      nombre: String!
      descripcion: String!
-     precio: String!
+     precio: Float!
      stock: Int!
      unidadMedida: UnidadMedida!
      moneda: Moneda!
@@ -39,7 +39,7 @@ input ProductInput {
 input ProductInputRecord {
     nombre: String!
     descripcion: String!
-    precio: String!
+    precio: Float!
     stock: Int!
     unidadMedida: UnidadMedida!
     moneda: Moneda!
@@ -66,7 +66,7 @@ type Product {
     id: ID!
     nombre: String
     descripcion: String
-    precio: String
+    precio: Float!
     stock: Int
     unidadMedida: UnidadMedida
     moneda: Moneda

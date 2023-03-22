@@ -2,12 +2,13 @@ package com.fredgar.pe.model;
 
 import com.fredgar.pe.enums.Moneda;
 import com.fredgar.pe.enums.UnidadMedida;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.math.BigDecimal;
 
@@ -27,8 +28,11 @@ public class Product {
   private Moneda moneda;
   private String fechaCreacion;
   private String fechaActualizacion;
-  @DBRef
+//  @DBRef
+
+  @Field(name = "marca")
   private Marca marca;
-  @DBRef
+
+  @Field(name = "categoria")
   private Categoria categoria;
 }

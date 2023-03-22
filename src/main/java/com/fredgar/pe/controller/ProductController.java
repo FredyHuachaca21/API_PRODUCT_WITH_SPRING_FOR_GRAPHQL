@@ -27,12 +27,12 @@ public class ProductController {
   }
 
   @MutationMapping
-  public Product saveProduct(@Argument ProductoInputRecord productoInputRecord) {
+  public Product crearProducto(@Argument("productInputRecord") ProductoInputRecord productoInputRecord) {
     return service.crearProducto(productoInputRecord);
   }
 
   @MutationMapping
-  public Product updateProduct(@Arguments String id, ProductoInputRecord productoInputRecord) {
+  public Product updateProduct(@Argument("id") String id, @Argument("productoInputRecord") ProductoInputRecord productoInputRecord) {
     return service.actualizarProducto(id, productoInputRecord);
   }
 
