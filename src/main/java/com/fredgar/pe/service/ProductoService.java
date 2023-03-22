@@ -1,7 +1,7 @@
 package com.fredgar.pe.service;
 
 import com.fredgar.pe.model.Product;
-import com.fredgar.pe.record.ProductoInputRecord;
+import com.fredgar.pe.input.ProductoInputRecord;
 
 import java.util.List;
 import java.util.Optional;

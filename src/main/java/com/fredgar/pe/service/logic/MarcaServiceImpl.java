@@ -29,8 +29,8 @@ public class MarcaServiceImpl implements MarcaService {
   @Override
   public Marca saveMarca(MarcaInput marcaInput) {
     Marca marcaDB = new Marca();
-    marcaDB.setNombre(marcaInput.getNombre());
-    marcaDB.setDescripcion(marcaInput.getDescripcion());
+    marcaDB.setNombre(marcaInput.nombre());
+    marcaDB.setDescripcion(marcaInput.descripcion());
     marcaDB.setFechaCreacion(LocalDate.now().toString());
     marcaDB.setFechaActualizacion(LocalDate.now().toString());
     return repository.save(marcaDB);
@@ -41,8 +41,8 @@ public class MarcaServiceImpl implements MarcaService {
     return repository.findById(id)
         .map(marcaDB -> {
           marcaDB.setNombre(marcaDB.getNombre());
-          marcaDB.setDescripcion(marcaInput.getDescripcion());
-          marcaDB.setFechaActualizacion(marcaInput.getFechaActualizacion());
+          marcaDB.setDescripcion(marcaInput.descripcion());
+          marcaDB.setFechaActualizacion(marcaInput.fechaActualizacion());
           return repository.save(marcaDB);
         } ).orElseThrow();
   }

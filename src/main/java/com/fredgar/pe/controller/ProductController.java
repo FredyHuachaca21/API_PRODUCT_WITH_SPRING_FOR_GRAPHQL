@@ -1,7 +1,7 @@
 package com.fredgar.pe.controller;
 
 import com.fredgar.pe.model.Product;
-import com.fredgar.pe.record.ProductoInputRecord;
+import com.fredgar.pe.input.ProductoInputRecord;
 import com.fredgar.pe.service.ProductoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.*;

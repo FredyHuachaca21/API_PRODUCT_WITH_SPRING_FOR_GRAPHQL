@@ -30,8 +30,8 @@ public class CategoriaServiceImpl implements CategoriaService {
   @Override
   public Categoria saveCategoria(CategoriaInput categoriaInput) {
     Categoria categoriaDB = new Categoria();
-    categoriaDB.setNombre(categoriaInput.getNombre());
-    categoriaDB.setDescripcion(categoriaInput.getDescripcion());
+    categoriaDB.setNombre(categoriaInput.nombre());
+    categoriaDB.setDescripcion(categoriaInput.descripcion());
     categoriaDB.setFechaCreacion(LocalDate.now().toString());
     categoriaDB.setFechaActualizacion(LocalDate.now().toString());
     return repository.save(categoriaDB);
@@ -41,9 +41,9 @@ public class CategoriaServiceImpl implements CategoriaService {
   public Categoria updateCategoria(String id, CategoriaInput categoriaInput) {
     return repository.findById(id)
         .map(categoriaDB -> {
-          categoriaDB.setNombre(categoriaInput.getNombre());
-          categoriaDB.setDescripcion(categoriaInput.getDescripcion());
-          categoriaDB.setFechaActualizacion(categoriaInput.getFechaActualizacion());
+          categoriaDB.setNombre(categoriaInput.nombre());
+          categoriaDB.setDescripcion(categoriaInput.descripcion());
+          categoriaDB.setFechaActualizacion(categoriaInput.fechaActualizacion());
           return repository.save(categoriaDB);
         }).orElseThrow();
   }

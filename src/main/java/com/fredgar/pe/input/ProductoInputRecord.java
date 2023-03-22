@@ -1,4 +1,4 @@
-package com.fredgar.pe.record;
+package com.fredgar.pe.input;
 
 import com.fredgar.pe.enums.Moneda;
 import com.fredgar.pe.enums.UnidadMedida;

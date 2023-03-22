@@ -3,7 +3,7 @@ package com.fredgar.pe.service.logic;
 import com.fredgar.pe.model.Categoria;
 import com.fredgar.pe.model.Marca;
 import com.fredgar.pe.model.Product;
-import com.fredgar.pe.record.ProductoInputRecord;
+import com.fredgar.pe.input.ProductoInputRecord;
 import com.fredgar.pe.repository.CategoriaRepository;
 import com.fredgar.pe.repository.MarcaRepository;
 import com.fredgar.pe.repository.ProductRepository;
