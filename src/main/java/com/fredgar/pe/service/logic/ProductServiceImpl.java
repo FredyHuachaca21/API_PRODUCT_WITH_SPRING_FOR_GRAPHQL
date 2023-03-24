@@ -1,5 +1,7 @@
 package com.fredgar.pe.service.logic;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fredgar.pe.model.Categoria;
 import com.fredgar.pe.model.Marca;
 import com.fredgar.pe.model.Product;
@@ -38,11 +40,31 @@ public class ProductServiceImpl implements ProductoService {
 
   @Override
   public Optional<Product> getProductById(String id) {
-    return repository.findById(id);
+    ObjectMapper objectMapper = new ObjectMapper();
+    try {
+      log.info("Producto encontrado para convertir a formato json: {}",
+          objectMapper.writeValueAsString(repository.findById(id)));
+    } catch (JsonProcessingException e) {
+      log.error("Producto no encontrado: ", e.getMessage());
+    }
+    return repository.findById(id)
+        .map(product -> {
+          log.info("Producto encontrado: {}", product);
+          return Optional.of(product);
+        })
+        .orElseGet(() -> {
+          log.warn("No se encontró el producto con ID: {}", id);
+          return Optional.empty();
+        });
   }
 
   @Override
   public List<Product> getAllProducts() {
+    try {
+      log.info("Lista de productos: {}", new ObjectMapper().writeValueAsString(repository.findAll()));
+    } catch (JsonProcessingException e) {
+      log.error("Error al convertir la lista a JSON", e);
+    }
     return repository.findAll();
   }
 

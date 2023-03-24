@@ -6,8 +6,16 @@ spring:
     graphiql:
       enabled: true
 
+#NIVELES DE LOGGING
+#TRACE: el nivel de logging más detallado, utilizado para registrar información muy específica y detallada.
+#DEBUG: utilizado para registrar información de depuración y rastreo de errores.
+#INFO: utilizado para registrar información general sobre el funcionamiento de la aplicación.
+#WARN: utilizado para registrar mensajes de advertencia sobre posibles problemas en la aplicación.
+#ERROR: utilizado para registrar mensajes de error que indican un problema en la aplicación.
+#FATAL: el nivel de logging más grave, utilizado para registrar errores críticos que impiden el funcionamiento de la aplicación.
+
 logging:
   level:
-    root: INFO
-    com.fredgar.pe.controller: WARN
-    com.fredgar.pe.service.logic: WARN
+    root: info
+    com.fredgar.pe.controller: info
+    com.fredgar.pe.service.logic: info
